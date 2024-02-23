@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\persistence\persistence\persistence.csproj" />
+    <ProjectReference Include="..\..\shared\sharedKernal\sharedKernal.csproj" />
+    <ProjectReference Include="..\domain\domain.csproj" />
+  </ItemGroup>
+
 </Project>
