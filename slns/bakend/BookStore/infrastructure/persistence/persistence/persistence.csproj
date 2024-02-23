@@ -21,11 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\core\domain\domain.csproj" />
+    <ProjectReference Include="..\..\..\core\application\application.csproj" />
   </ItemGroup>
 
 </Project>
