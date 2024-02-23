@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace persistence;
 
-namespace persistence
+public class SchemaVersion
 {
-    public partial class SchemaVersion
-    {
-        public int Id { get; set; }
-        public string ScriptName { get; set; } = null!;
-        public DateTime Applied { get; set; }
-    }
+    public int Id { get; set; }
+    public string ScriptName { get; set; } = null!;
+    public DateTime Applied { get; set; }
 }

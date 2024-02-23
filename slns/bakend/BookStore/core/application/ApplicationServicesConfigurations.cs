@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace application
+namespace application;
+
+public static class ApplicationServicesConfigurations
 {
-    public static class ApplicationServicesConfigurations
+    // adding the configuration for the application services
+    public static void AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // adding the configuration for the application services
-        
+        //services.AddTransient<IBookService, BookService>();
+        services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssembly(typeof(ApplicationServicesConfigurations).Assembly));
     }
 }
