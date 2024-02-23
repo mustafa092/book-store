@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace persistence.Context;
+namespace persistence.Data;
 
 public class ElmDbContext : DbContext
 {

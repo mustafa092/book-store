@@ -13,17 +13,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clients", "clients", "{247F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sharedKernal", "sharedKernal", "{41CD39D8-0D07-4D3B-977F-1DB1966539AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "application", "core\application\application.csproj", "{ACCF17E1-0A1F-4B5A-92B0-9F3AD52B0AD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "application", "core\application\application.csproj", "{ACCF17E1-0A1F-4B5A-92B0-9F3AD52B0AD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "domain", "core\domain\domain.csproj", "{9617F8FF-539F-4D0D-A8F3-77755717DB9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "domain", "core\domain\domain.csproj", "{9617F8FF-539F-4D0D-A8F3-77755717DB9B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "persistence", "persistence", "{4F3B913F-4378-41DE-BA57-44665E81B802}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "persistence", "infrastructure\persistence\persistence\persistence.csproj", "{C347DF9A-933C-4080-A8B4-CB63C3F0E287}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "persistence", "infrastructure\persistence\persistence\persistence.csproj", "{C347DF9A-933C-4080-A8B4-CB63C3F0E287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sharedKernal", "shared\sharedKernal\sharedKernal.csproj", "{1739EBB7-5A43-4028-9D50-8EF9D74EA693}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sharedKernal", "shared\sharedKernal\sharedKernal.csproj", "{1739EBB7-5A43-4028-9D50-8EF9D74EA693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "client\API\API.csproj", "{7712F43A-546F-49C8-A8F4-DBA1C80A2CCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "client\API\API.csproj", "{7712F43A-546F-49C8-A8F4-DBA1C80A2CCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCuttinConcerns", "CrossCuttinConcerns", "{376EB1F2-B8F0-4025-8FA7-9F1B0D2A1BC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,7 @@ Global
 		{C347DF9A-933C-4080-A8B4-CB63C3F0E287} = {4F3B913F-4378-41DE-BA57-44665E81B802}
 		{1739EBB7-5A43-4028-9D50-8EF9D74EA693} = {41CD39D8-0D07-4D3B-977F-1DB1966539AE}
 		{7712F43A-546F-49C8-A8F4-DBA1C80A2CCF} = {247F2D10-F7EC-4AB4-A0E7-EADBF23B28DE}
+		{376EB1F2-B8F0-4025-8FA7-9F1B0D2A1BC2} = {88CF9FBA-EFB1-439F-BB6A-F642228D3D78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED3D0921-EA7C-44A9-B85F-1D72C5EF06CE}
