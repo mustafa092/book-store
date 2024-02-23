@@ -1,3 +1,4 @@
+using application;
 using persistence;
 
 namespace API;
@@ -39,5 +40,6 @@ public class Program
     private static void ConfigureLayersExtensionsServices(WebApplicationBuilder builder)
     {
         builder.Services.AddPersistenceServices(builder.Configuration);
+        builder.Services.AddApplicationServices(builder.Configuration);
     }
 }
