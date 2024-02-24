@@ -27,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.initSearch();
     this.handleUserInput();
   }
