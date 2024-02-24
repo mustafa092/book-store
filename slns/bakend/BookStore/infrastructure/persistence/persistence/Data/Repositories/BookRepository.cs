@@ -4,6 +4,7 @@ using application.infrastructure.Repositories;
 using cachingManager.services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace persistence.Data.Repositories;
 
@@ -11,12 +12,14 @@ public class BookRepository : IBookRepository
 {
     private const string BooksCacheKey = nameof(BookRepository);
     private readonly ICacheService _cacheService;
+    private readonly ILogger<BookRepository> _logger;
     private readonly ElmDbContext _elmDbContext;
 
-    public BookRepository(ElmDbContext elmDbContext, ICacheService cacheService)
+    public BookRepository(ElmDbContext elmDbContext, ICacheService cacheService , ILogger<BookRepository> logger)
     {
         _elmDbContext = elmDbContext;
         _cacheService = cacheService;
+        _logger = logger;
     }
 
 
@@ -56,6 +59,7 @@ public class BookRepository : IBookRepository
         var cacheKey = $"{BooksCacheKey}_Page{request.PageNumber}_Size{request.PageSize}";
         if (!_cacheService.TryGetValue(cacheKey, out List<LoadingBooksResponse> cachedBooks))
         {
+            _logger.LogInformation("Cache miss for key {cacheKey} and retrieve from the database ", cacheKey);
             // configure the cache options
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSlidingExpiration(TimeSpan.FromMinutes(60))
@@ -65,6 +69,10 @@ public class BookRepository : IBookRepository
             cachedBooks = await RetrieveRecordFromDataStore(request);
             // Cache the result
             _cacheService.Set(cacheKey, cachedBooks, cacheEntryOptions);
+        }
+        else
+        {
+            _logger.LogInformation("Cache hit for key {cacheKey} and retrieve from the cache ", cacheKey);
         }
 
         return cachedBooks;

@@ -7,12 +7,15 @@ namespace API.Controllers;
 
 public class BooksController : BaseController
 {
+    private readonly ILogger<BooksController> _logger;
+
     private readonly IMediator _mediator;
     // adding mediator to the controller
 
-    public BooksController(IMediator mediator)
+    public BooksController(IMediator mediator, ILogger<BooksController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -20,6 +23,7 @@ public class BooksController : BaseController
     {
         try
         {
+            _logger.LogInformation("Loading books");
             var books = await _mediator.Send(new LoadBooksQuery
             {
                 SearchKey = request.SearchKey,
@@ -31,6 +35,7 @@ public class BooksController : BaseController
         catch (Exception ex)
         {
             // _logger.LogError(ex, "Error loading books");
+            _logger.LogError(ex, "Error loading books");
             return StatusCode(500, "Internal server error");
         }
     }
