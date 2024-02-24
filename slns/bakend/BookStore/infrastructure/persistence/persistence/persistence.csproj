@@ -22,6 +22,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\core\application\application.csproj"/>
+        <ProjectReference Include="..\..\caching-manager\cachingManager\cachingManager.csproj" />
     </ItemGroup>
 
 </Project>

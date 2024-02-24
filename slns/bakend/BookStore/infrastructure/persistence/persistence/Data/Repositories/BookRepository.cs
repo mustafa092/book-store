@@ -1,18 +1,24 @@
 ﻿using System.Runtime.CompilerServices;
 using application.DTOs.infrastructure;
 using application.infrastructure.Repositories;
+using cachingManager.services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace persistence.Data.Repositories;
 
 public class BookRepository : IBookRepository
 {
+    private const string BooksCacheKey = nameof(BookRepository);
+    private readonly ICacheService _cacheService;
     private readonly ElmDbContext _elmDbContext;
 
-    public BookRepository(ElmDbContext elmDbContext)
+    public BookRepository(ElmDbContext elmDbContext, ICacheService cacheService)
     {
         _elmDbContext = elmDbContext;
+        _cacheService = cacheService;
     }
+
 
     public async Task<List<LoadingBooksResponse>> LoadingBooksAsyncV2(LoadingBooksRequest request)
     {
@@ -43,7 +49,28 @@ public class BookRepository : IBookRepository
         return books;
     }
 
+
     public async Task<List<LoadingBooksResponse>> SearchAsync(LoadingBooksRequest request)
+    {
+        // Construct a unique cache key based on the request parameters
+        var cacheKey = $"{BooksCacheKey}_Page{request.PageNumber}_Size{request.PageSize}";
+        if (!_cacheService.TryGetValue(cacheKey, out List<LoadingBooksResponse> cachedBooks))
+        {
+            // configure the cache options
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(60))
+                .SetAbsoluteExpiration(TimeSpan.FromHours(24))
+                .SetPriority(CacheItemPriority.High);
+            // Cache miss; fetch data from database
+            cachedBooks = await RetrieveRecordFromDataStore(request);
+            // Cache the result
+            _cacheService.Set(cacheKey, cachedBooks, cacheEntryOptions);
+        }
+
+        return cachedBooks;
+    }
+
+    private async Task<List<LoadingBooksResponse>> RetrieveRecordFromDataStore(LoadingBooksRequest request)
     {
         IQueryable<Book> query = _elmDbContext.Books;
 
@@ -60,6 +87,7 @@ public class BookRepository : IBookRepository
             query = _elmDbContext.Books.FromSqlInterpolated(
                 FormattableStringFactory.Create(rawSqlQuery, request.SearchKey));
         }
+
         var books = await query.OrderBy(b => b.BookId) // Adjust the ordering as per your requirement
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)

@@ -1,4 +1,5 @@
 using application;
+using cachingManager;
 using persistence;
 
 namespace API;
@@ -51,5 +52,6 @@ public class Program
     {
         builder.Services.AddPersistenceServices(builder.Configuration);
         builder.Services.AddApplicationServices(builder.Configuration);
+        builder.Services.AddCachingServices(builder.Configuration);
     }
 }
