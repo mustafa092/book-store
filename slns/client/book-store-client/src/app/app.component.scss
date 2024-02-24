@@ -1,0 +1,141 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 600px; // Adjust the max-width as needed
+
+  .search-input {
+    flex-grow: 1; // Allows the input to grow and fill the space
+    padding: 15px 20px; // Increased padding for a larger input
+    font-size: 1.2rem; // Larger font size for the input text
+    border: 2px solid #ccc; // Slightly thicker border for emphasis
+    border-radius: 25px 0 0 25px; // Rounded left corners
+    outline: none; // Removes the default focus outline
+    &:focus {
+      border-color: #888; // Changes border color on focus
+    }
+  }
+
+  .btn-primary {
+    padding: 15px 25px; // Increased padding for a larger button
+    font-size: 1.2rem; // Larger font size for the button text
+    border-radius: 0 25px 25px 0; // Rounded right corners
+    border: 2px solid #007bff; // Matching border to the input
+    background-color: #007bff;
+    color: white;
+    outline: none;
+
+    &:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  }
+}
+
+.container {
+  padding: 20px;
+  max-width: 1400px; // Increased max-width for larger overall card size
+  margin: 0 auto;
+
+  position: relative;
+
+  // Apply blur effect when loading is true
+  &.loading {
+    filter: blur(5px);
+  }
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); // Increased min width of cards
+  gap: 20px;
+}
+
+.card {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .card-img-top {
+    width: 100%;
+    height: 250px; // Increased height for larger images
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .card-info {
+    margin-bottom: 10px;
+
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    margin-top: 5px;
+    color: #333;
+  }
+
+  .card-author {
+    font-size: 1rem;
+    margin-top: 5px;
+    color: #555;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .btn-primary {
+    align-self: start;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 15px;
+    margin-top: auto;
+
+    &:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  }
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; // High enough to be above everything else
+
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .loading-text {
+    font-size: 1.5rem;
+    color: #007bff;
+  }
+}
+
+.blur-content {
+  filter: blur(5px);
+}
+

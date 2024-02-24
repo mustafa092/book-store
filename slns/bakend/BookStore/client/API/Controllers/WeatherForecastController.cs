@@ -41,7 +41,7 @@ public class WeatherForecastController : ControllerBase
         try
         {
             // if i Got a time I will implement search using elastic search because it is faster and more efficient 
-            var books = await _bookRepository.LoadingBooksAsyncV2(request);
+            var books = await _bookRepository.SearchAsync(request);
             return Ok(books);
         }
         catch (Exception ex)

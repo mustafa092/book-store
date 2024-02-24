@@ -2,11 +2,20 @@
 
 public class LoadingBooksRequest
 {
-    // dto for loading books request with pagination
-    public string SearchKey { get; set; }
+    private const int MaxPageSize = 30;
 
-    public int PageNumber { get; set; }
-    public int PageSize { get; set; } = 20;
+    private int _pageSize = 10; // Default page size, you can adjust this
+
+    // dto for loading books request with pagination
+    public string? SearchKey { get; set; }
+
+    public int PageNumber { get; set; } = 1;
+
+    public int PageSize
+    {
+        get => _pageSize;
+        set => _pageSize = value > MaxPageSize ? MaxPageSize : value;
+    }
 }
 
 public class LoadingBooksResponse

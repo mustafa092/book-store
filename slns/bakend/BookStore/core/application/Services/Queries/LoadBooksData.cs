@@ -6,7 +6,7 @@ namespace application.Services.Queries;
 
 public class LoadBooksQuery : IRequest<IEnumerable<LoadingBooksResponse>>
 {
-    public string SearchKey { get; set; }
+    public string? SearchKey { get; set; }
     public int PageNumber { get; set; }
     // set the maximum number of items per page to 30
     public int PageSize { get; set; } = 20;
@@ -37,6 +37,6 @@ public class LoadBooksQueryHandler : IRequestHandler<LoadBooksQuery, IEnumerable
             PageSize = request.PageSize
         };
 
-        return await _bookRepository.LoadingBooksAsyncV2(loadingBooksRequest);
+        return await _bookRepository.SearchAsync(loadingBooksRequest);
     }
 }
